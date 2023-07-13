@@ -16,6 +16,7 @@ const SocketIO = require('socket.io');
 const io = SocketIO(server);
 
 const typingUsers = new Set();
+const connectedUsers = new Map(); 
 
 io.on('connection', (socket) => {
   console.log('New connection', socket.id);
@@ -37,5 +38,15 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     typingUsers.delete(socket.id);
     io.sockets.emit('chat:typing:end');
+    const username = connectedUsers.get(socket.id); 
+    connectedUsers.delete(socket.id);
+    io.sockets.emit('users:update', Array.from(connectedUsers.values()));
+  });
+  socket.on('set:username', (username) => {
+    connectedUsers.set(socket.id, {
+      id: socket.id,
+      username: username
+    });
+    io.sockets.emit('users:update', Array.from(connectedUsers.values()));
   });
 });

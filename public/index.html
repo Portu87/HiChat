@@ -12,14 +12,23 @@
 </head>
 <body>
     
-    <div id="chat-container">
-        <div id="chat-window">
-            <div id="output"></div>
-            <div id="actions"></div>
+    <div id="container">
+        <div id="sidebar">
+           
+            <h1>HiChat</h1>
+            <h3>En línea</h3>
+            <ul id="users-list"></ul>
+        
         </div>
-        <input type="text" id="username" placeholder="NickName">
-        <input type="text" id="message" placeholder="Message">
-        <button id="send">Send</button>
+        <div id="chat-container">
+            <div id="chat-window">
+                <div id="output"></div>
+                <div id="actions"></div>
+            </div>
+            <input type="text" id="username" placeholder="Nombre">
+            <input type="text" id="message" placeholder="Mensaje">
+            <button id="send">Enviar</button>
+        </div>
     </div>
 
     <script src="socket.io/socket.io.js"></script>
